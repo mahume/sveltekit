@@ -40,11 +40,7 @@
 	onInputAction={handleToggleAll}
 	bind:value={todosState.todoText}
 />
-<TodoList
-	todos={todosState.todos}
-	onToggleItem={handleToggleItem}
-	onDeleteItem={handleDeleteItem}
-/>
+<TodoList todos={activeTodos} onToggleItem={handleToggleItem} onDeleteItem={handleDeleteItem} />
 {#if hasTodos}
 	<Toolbar infoText={remainingTodos} onAction={hasCompletedTodos ? handleClearTodos : null} />
 {/if}

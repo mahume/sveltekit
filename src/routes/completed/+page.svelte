@@ -11,7 +11,7 @@
 	let activeTodos = $derived(todosState.todos.filter((todo) => !todo.isCompleted));
 
 	let remainingTodos = $derived(activeTodos.length);
-	let hasCompletedTodos = $derived(completedTodos.length > 0);
+	let hasCompletedTodos = $derived(remainingTodos > 0);
 
 	function handleAddTodo(e: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement }) {
 		e.preventDefault();
@@ -40,11 +40,7 @@
 	onInputAction={handleToggleAll}
 	bind:value={todosState.todoText}
 />
-<TodoList
-	todos={todosState.todos}
-	onToggleItem={handleToggleItem}
-	onDeleteItem={handleDeleteItem}
-/>
+<TodoList todos={completedTodos} onToggleItem={handleToggleItem} onDeleteItem={handleDeleteItem} />
 {#if hasTodos}
 	<Toolbar infoText={remainingTodos} onAction={hasCompletedTodos ? handleClearTodos : null} />
 {/if}
